@@ -1,0 +1,88 @@
+CREATE DATABASE bd_genomica; -- crea la base de datos
+USE bd_genomica; -- selecciona la base de datos
+
+
+CREATE TABLE GEN( -- crea la tabla GEN
+	nombre_gen VARCHAR(100) NOT NULL, -- nombre del gen, obligatorio
+    localizacion_gen VARCHAR(100), -- localzacion del gen 
+    descripcion_gen VARCHAR(225) NOT NULL, -- descripcion del gen, obligatorio 
+    
+    PRIMARY KEY (nombre_gen) -- define nombre_gen como clave primaria 
+);
+
+
+CREATE TABLE SECUENCIA ( -- crea la tabla SECUENCIA
+	Id_secuencia INT NOT NULL AUTO_INCREMENT, -- identificador unico de la secuencia
+    nombre_gen VARCHAR(100) NOT NULL, -- gen al que pertecene la secuencia
+    repr_cad_ADN VARCHAR(1000) NOt NULL, -- cadena de ADN, maximo 1000 caracteres
+    tipo_sec VARCHAR(50), -- tipo de secuencia: exon, intron, CDS, promotor, etc.
+    pos_rel_gen_sec INT NOT NULL, -- posicion relativa de la secuencia dentro del gen 
+    PRIMARY KEY (Id_secuencia), -- define Id_secuencia como clave primaria 
+    FOREIGN KEY (nombre_gen) REFERENCES GEN(nombre_gen), -- relaciona la secuncia con GEN
+    CHECK (CHAR_LENGTH(repr_cad_ADN) BETWEEN 10 AND 100), -- obliga que le el ADN tenga entre 100 y 100 Caracteres
+    CHECK (pos_rel_gen_sec > 0) -- obliga a que la posicion sea un entero positivo 
+    
+    
+);
+
+
+CREATE TABLE VARIANTE( -- crea latabla VARIANTE
+	Id_var INT NOT NULL AUTO_INCREMENT, -- identificador unico de la variante 
+    Id_secuencia INT NOT NULL, -- secuencia donde se encuentra la variante
+    alelo_ref VARCHAR(50) NOT NULL DEFAULT '-', -- alelo por referencia; por defecto '-'
+    alelo_mut VARCHAR(50) NOT NULL DEFAULT '-', -- alelo mutado; por defecto '-'
+    tipo_var VARCHAR(50), -- tipo de variante: SNP, insercion, delecion, etc.
+    pos_rel_gen_var INT NOT NULL, -- posicion relativa de la variante
+    PRIMARY KEY (Id_var), -- define Id_var como clave primaria
+    FOREIGN KEY (Id_secuencia) REFERENCES SECUENCIA(Id_secuencia), -- conecta con SECUENCIA
+    CHECK (pos_rel_gen_var > 0) -- obliga a que la posicion sea positiva
+);
+
+CREATE TABLE ANOTACION( -- crea la tabla ANOTACION
+	Id_anotacion INT NOT NULL AUTO_INCREMENT, -- identificador unico de la anotacion
+    rel_gen VARCHAR(100), -- indica la relacion de la anotacion con el gen 
+    tipo_anot VARCHAR(50), -- tipo de anotacion: funcional, clinica, etc.
+    descrip_anot VARCHAR(255), -- descripcion de la anotacion
+    PRIMARY KEY (Id_anotacion) -- define Id_anotacion  como clave primaria 
+	
+
+);
+
+CREATE TABLE ESTUDIO(
+	ref_articulo VARCHAR(8) NOT NULL, -- referencia del estudio, por ejemplo: aaaa/111
+    titulo VARCHAR(255), -- titulo del estudio
+    fecha_publicacion DATE, -- fecha de publicacion del estudio 
+    PRIMARY KEY (ref_articulo), -- define la referencia como clave primaria 
+    CHECK (ref_articulo REGEXP '^[A-Za-z]{4}/[0-9]{3}$') -- obliga al formato: cuatro letras/ tres numeros 
+);
+
+
+-- Aqui continua Ari con las tablas ESTUDIO_GEN, ESTUDIO_VARIANTE, GEN_ANOTACION.
+
+
+-- comparacion final 
+
+SHOW TABLES; -- muestra todas las tablas creadas en la base de datos
+DESCRIBE GEN; -- muestra las columnas y caracteristicas de la tabla GEN
+DESCRIBE SECUENCIA; -- muestra las columnas y caracteristicas de la tabla SECUENCIA
+DESCRIBE VARIANTE; -- muestra las columnas y caracteristicas de la tabla VARIANTE
+DESCRIBE ANOTACION; -- muestra las columnas y caracteristicas de la tabla ANOTACION
+DESCRIBE ESTUDIO; -- muestra las columnas y caracteristicas de la tabla ESTUDIO
+
+DESCRIBE ESTUDIO_GEN; -- muestra las columnas y claves de ESTUDIO_GEN
+DESCRIBE ESTUDIO_VARIANTE; -- muestra las columnas y claves de ESTUDIO_VARIANTE
+DESCRIBE GEN_ANOTACION; -- muestra las columnas y claves de GEN_ANOTACION
+
+
+
+SHOW CREATE TABLE GEN; -- muestra la definicion SQL completa de GEN
+SHOW CREATE TABLE SECUENCIA; -- permite comprobar PK, FK y CHECK de SECUENCIA
+SHOW CREATE TABLE VARIANTE; -- permite comprobar PK, FK, DEFAULT y CHECK de VARIANTE
+SHOW CREATE TABLE ANOTACION; -- muestra la definicion completa de ANOTACION
+SHOW CREATE TABLE ESTUDIO; -- permite comprobar la PK y la restriccion del formato de referencia 
+
+SHOW CREATE TABLE ESTUDIO_GEN; -- comprueba PK y FK de ESTUDIO_GEN
+SHOW CREATE TABLE ESTUDIO_VARIANTE; -- comprueba PK y FK de ESTUDIO_VARIANTE
+SHOW CREATE TABLE GEN_ANOTACION; -- comprueba PK y FK de GEN_ANOTACION
+
+
