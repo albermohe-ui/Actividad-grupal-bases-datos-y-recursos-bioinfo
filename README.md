@@ -2,7 +2,7 @@
 Para la entrega el 26 octubre 2026 a las 23:59 h límite
 
 
-Las ESTACIONES para completar la actividad son secuenciales, y de cada una de ellas debe obtenerse un resultado que se presenta en el informe y ceba a la siguiente
+Las ESTACIONES para completar la actividad son secuenciales, y de cada una de ellas debe obtenerse un resultado que se presenta en el informe y ceba a la siguiente:
 
 1º) Generar el diagrama ER
 
