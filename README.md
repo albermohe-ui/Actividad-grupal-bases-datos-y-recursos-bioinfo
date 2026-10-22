@@ -5,9 +5,13 @@ Para la entrega el 26 octubre 2026 a las 23:59 h límite
 Las ESTACIONES para completar la actividad son secuenciales, y de cada una de ellas debe obtenerse un resultado que se presenta en el informe y ceba a la siguiente
 
 1º) Generar el diagrama ER
+
 2º Transformarlo a modelo relacional
+
 3ª) Crear la base de datos (tablas, relaciones, restricciones...) con DDL SQL.  Se implementan el diagrama ER y el modelo relacional y se incluyen las restricciones que constan en las instrucciones
+
 4º) Introducir contenido en la base de datos: llenar las tablas con DML de SQL, según las instrucciones que nos dan
+
 
 Por último, pasamos lo obtenido a la hoja de activdad (máx 20 pgs) y lo entregamos en fecha
 
