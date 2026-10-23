@@ -1,0 +1,69 @@
+-- Manipulación y edición de datos en las tablas generadas
+
+INSERT INTO gen -- añado información relativa al gen MAFB a la tabla
+(nombre_gen, localizacion_gen, descripcion_gen)
+VALUES("MAFB", "20q12", "Factor de transcripción del tipo «leucine zipper» básico (bZIP). La proteína codificada reprime la transcripción, mediada por ETS1, de genes específicos de la línea eritroide.");
+
+UPDATE gen
+SET descripcion_gen = "MAF bZIP transcription factor B"
+WHERE nombre_gen = "MAFB";
+
+INSERT INTO anotacion -- añado información relativa a la anotación del gen MAFB a la tabla
+(Id_anotacion, rel_gen, tipo_anot, descrip_anot)
+VALUES(9935, "MAFB", "GCF_000001405.40-RS_2025_08", "Factor de transcripción del tipo «leucine zipper» básico (bZIP). La proteína codificada reprime la transcripción, mediada por ETS1, de genes específicos de la línea eritroide.");
+
+INSERT INTO estudio -- añado información relativa a un estudio sobre MAFB a la tabla
+(ref_articulo, titulo, fecha_publicacion)
+VALUES("Siew/996", "MafB is an interaction partner and repressor of Ets-1 that inhibits erythroid differentiation", "1996-04-05");
+
+INSERT INTO estudio_gen -- relaciono la referencia del articulo de la tabla estudio con el gen MAFB
+(ref_articulo, nombre_gen)
+VALUES("Siew/996", "MAFB");
+
+INSERT INTO secuencia -- añado información relativa a la secuencia del gen MAFB a la tabla
+(Id_secuencia, nombre_gen, repr_cad_ADN, tipo_sec, pos_rel_gen_sec)
+VALUES(005461, "MAFB", "1 acagctgcac cgccgagctg cgagcggctg cgagcgagag agcgtaagag caagagagct 61 agagagcgag caacgggcac tcgccccacg cctcccctca gccccaccgc gcgctccgct 121 tgcctctcca ccccgcccga ctctacccgg cccggtccct gcgcgggcac agcccagagc
+ 181 tctggggcgg tgcaggcagc ctcgggactc tccggcgcgc cgccgcgtcc ccagacaaag 241 gcttggccgg cggccccggc ccgctgcgcc ctcgctcccc gcctccccag ctcttctccg 301 ctcttccccc ccgcgcttgg ctcggcgcgc tccggccggc cgcaaagttt cccgggcggc 
+ 361 agcggcggct gcgcctcgct tcagcgatgg ccgcggagct gagcatgggg ccagagctgc 421 ccaccagccc gctggccatg gagtatgtca acgacttcga cctgctcaag ttcgacgtga 481 agaaggagcc actggggcgc gcggagcgtc cgggcaggcc ctgcacacgc ctgcagccag", "mRNA", "20");
+
+INSERT INTO variante -- añado información relativa a una variante del gen MAFB a la tabla
+(Id_var, Id_secuencia, alelo_ref, alelo_mut, tipo_var, pos_rel_gen_var)
+VALUES(807627, 005461, "A", "G", "Patogénica", 184);
+
+INSERT INTO estudio -- añado información relativa a un estudio sobre la variante del gen MAFB descrita en la tabla anterior
+(ref_articulo, titulo, fecha_publicacion)
+VALUES("Zank/012", "Multicentric carpotarsal osteolysis is caused by mutations clustering in the amino-terminal transcriptional activation domain of MAFB", "2012-03-09");
+
+INSERT INTO estudio_variante -- relaciono la referencia del articulo sobre la variante del gen MAFB con dicha variante
+(ref_articulo, Id_var)
+VALUES("Zank/012", 807627);
+
+INSERT INTO gen_anotacion -- relaciono el nombre del gen con su referencia de anotación
+(nombre_gen, Id_anotacion)
+VALUES("MAFB", 9935);
+
+-- Muestro los valores añadidos a todas las tablas de la base de datos
+
+SELECT *
+FROM anotacion;
+
+SELECT *
+FROM estudio;
+
+SELECT *
+FROM estudio_gen;
+
+SELECT *
+FROM estudio_variante;
+
+SELECT *
+FROM gen;
+
+SELECT *
+FROM gen_anotacion;
+
+SELECT *
+FROM secuencia;
+
+SELECT *
+FROM variante;
