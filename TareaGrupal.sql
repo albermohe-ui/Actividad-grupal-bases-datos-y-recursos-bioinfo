@@ -19,7 +19,7 @@ CREATE TABLE SECUENCIA ( -- crea la tabla SECUENCIA
     pos_rel_gen_sec INT NOT NULL, -- posicion relativa de la secuencia dentro del gen 
     PRIMARY KEY (Id_secuencia), -- define Id_secuencia como clave primaria 
     FOREIGN KEY (nombre_gen) REFERENCES GEN(nombre_gen), -- relaciona la secuncia con GEN
-    CHECK (CHAR_LENGTH(repr_cad_ADN) BETWEEN 10 AND 100), -- obliga que le el ADN tenga entre 100 y 100 Caracteres
+    CHECK (CHAR_LENGTH(repr_cad_ADN) BETWEEN 10 AND 1000), -- obliga a que el ADN tenga entre 10 y 1000 Caracteres
     CHECK (pos_rel_gen_sec > 0) -- obliga a que la posicion sea un entero positivo 
     
     
@@ -57,7 +57,31 @@ CREATE TABLE ESTUDIO(
 );
 
 
--- Aqui continua Ari con las tablas ESTUDIO_GEN, ESTUDIO_VARIANTE, GEN_ANOTACION.
+CREATE TABLE ESTUDIO_GEN( -- crea la tabla ESTUDIO_GEN
+    ref_articulo VARCHAR(8) NOT NULL, -- referencia del estudio
+    nombre_gen VARCHAR(100) NOT NULL, -- gen al que pertecene la secuencia
+    PRIMARY KEY (ref_articulo, nombre_gen), -- define ref_articulo y nombre_gen como claves primarias compuestas
+    FOREIGN KEY (ref_articulo) REFERENCES ESTUDIO(ref_articulo), -- relaciona la tabla con ESTUDIO
+    FOREIGN KEY (nombre_gen) REFERENCES GEN(nombre_gen) -- relaciona la tabla con GEN
+);
+
+CREATE TABLE ESTUDIO_VARIANTE( -- crea la tabla ESTUDIO_VARIANTE
+    ref_articulo VARCHAR(8) NOT NULL, -- referencia del estudio
+    Id_var INT NOT NULL, -- identificador unico de la variante 
+    PRIMARY KEY (ref_articulo, Id_var), -- define ref_articulo e Id_var como claves primarias compuestas
+    FOREIGN KEY (ref_articulo) REFERENCES ESTUDIO(ref_articulo), -- relaciona la tabla con ESTUDIO
+    FOREIGN KEY (Id_var) REFERENCES VARIANTE(Id_var) -- relaciona la tabla con VARIANTE
+
+);
+
+CREATE TABLE GEN_ANOTACION( -- crea la tabla GEN_ANOTACION
+    nombre_gen VARCHAR(100) NOT NULL, -- gen al que pertecene la secuencia
+    Id_anotacion INT NOT NULL, -- identificador unico de la anotacion
+    PRIMARY KEY (nombre_gen, Id_anotacion), -- define ref_articulo e Id_anotacion como claves primarias compuestas
+    FOREIGN KEY (nombre_gen) REFERENCES GEN(nombre_gen), -- relaciona la tabla con GEN
+    FOREIGN KEY (Id_anotacion) REFERENCES ANOTACION(Id_anotacion) -- relaciona la tabla con ANOTACION
+
+);
 
 
 -- comparacion final 
@@ -68,7 +92,6 @@ DESCRIBE SECUENCIA; -- muestra las columnas y caracteristicas de la tabla SECUEN
 DESCRIBE VARIANTE; -- muestra las columnas y caracteristicas de la tabla VARIANTE
 DESCRIBE ANOTACION; -- muestra las columnas y caracteristicas de la tabla ANOTACION
 DESCRIBE ESTUDIO; -- muestra las columnas y caracteristicas de la tabla ESTUDIO
-
 DESCRIBE ESTUDIO_GEN; -- muestra las columnas y claves de ESTUDIO_GEN
 DESCRIBE ESTUDIO_VARIANTE; -- muestra las columnas y claves de ESTUDIO_VARIANTE
 DESCRIBE GEN_ANOTACION; -- muestra las columnas y claves de GEN_ANOTACION
@@ -80,7 +103,6 @@ SHOW CREATE TABLE SECUENCIA; -- permite comprobar PK, FK y CHECK de SECUENCIA
 SHOW CREATE TABLE VARIANTE; -- permite comprobar PK, FK, DEFAULT y CHECK de VARIANTE
 SHOW CREATE TABLE ANOTACION; -- muestra la definicion completa de ANOTACION
 SHOW CREATE TABLE ESTUDIO; -- permite comprobar la PK y la restriccion del formato de referencia 
-
 SHOW CREATE TABLE ESTUDIO_GEN; -- comprueba PK y FK de ESTUDIO_GEN
 SHOW CREATE TABLE ESTUDIO_VARIANTE; -- comprueba PK y FK de ESTUDIO_VARIANTE
 SHOW CREATE TABLE GEN_ANOTACION; -- comprueba PK y FK de GEN_ANOTACION
