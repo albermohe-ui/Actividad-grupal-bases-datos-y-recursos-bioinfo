@@ -10,7 +10,7 @@ WHERE nombre_gen = "MAFB";
 
 INSERT INTO anotacion -- añado información relativa a la anotación del gen MAFB a la tabla
 (Id_anotacion, rel_gen, tipo_anot, descrip_anot)
-VALUES(9935, "MAFB", "GCF_000001405.40-RS_2025_08", "Factor de transcripción del tipo «leucine zipper» básico (bZIP). La proteína codificada reprime la transcripción, mediada por ETS1, de genes específicos de la línea eritroide.");
+VALUES(9935, "MAFB", "Functional", "Plays a pivotal role in regulating lineage-specific hematopoiesis by repressing ETS1-mediated transcription of erythroid-specific genes in myeloid cells");
 
 INSERT INTO estudio -- añado información relativa a un estudio sobre MAFB a la tabla
 (ref_articulo, titulo, fecha_publicacion)
@@ -22,9 +22,7 @@ VALUES("Siew/996", "MAFB");
 
 INSERT INTO secuencia -- añado información relativa a la secuencia del gen MAFB a la tabla
 (Id_secuencia, nombre_gen, repr_cad_ADN, tipo_sec, pos_rel_gen_sec)
-VALUES(005461, "MAFB", "1 acagctgcac cgccgagctg cgagcggctg cgagcgagag agcgtaagag caagagagct 61 agagagcgag caacgggcac tcgccccacg cctcccctca gccccaccgc gcgctccgct 121 tgcctctcca ccccgcccga ctctacccgg cccggtccct gcgcgggcac agcccagagc
- 181 tctggggcgg tgcaggcagc ctcgggactc tccggcgcgc cgccgcgtcc ccagacaaag 241 gcttggccgg cggccccggc ccgctgcgcc ctcgctcccc gcctccccag ctcttctccg 301 ctcttccccc ccgcgcttgg ctcggcgcgc tccggccggc cgcaaagttt cccgggcggc 
- 361 agcggcggct gcgcctcgct tcagcgatgg ccgcggagct gagcatgggg ccagagctgc 421 ccaccagccc gctggccatg gagtatgtca acgacttcga cctgctcaag ttcgacgtga 481 agaaggagcc actggggcgc gcggagcgtc cgggcaggcc ctgcacacgc ctgcagccag", "mRNA", "20");
+VALUES(005461, "MAFB", "ACAGCTGCACCGCCGAGCTGCGAGCGGCTGCGAGCGAGAGAGCGTAAGAGCAAGAGAGCTAGAGAGCGAGCAACGGGCACTCGCCCCACGCCTCCCCTCAGCCCCACCGCGCGCTCCGCTTGCCTCTCCACCCCGCCCGACTCTACCCGGCCCGGTCCCTGCGCGGGCACAGCCCAGAG", "cDNA", "20");
 
 INSERT INTO variante -- añado información relativa a una variante del gen MAFB a la tabla
 (Id_var, Id_secuencia, alelo_ref, alelo_mut, tipo_var, pos_rel_gen_var)
@@ -41,6 +39,78 @@ VALUES("Zank/012", 807627);
 INSERT INTO gen_anotacion -- relaciono el nombre del gen con su referencia de anotación
 (nombre_gen, Id_anotacion)
 VALUES("MAFB", 9935);
+
+INSERT INTO gen -- añado información relativa al gen PGM1 a la tabla
+(nombre_gen, localizacion_gen, descripcion_gen)
+VALUES("PGM1", "1p31.3", "Phosphoglucomutase 1");
+
+INSERT INTO anotacion -- añado información relativa a la anotación del gen PGM1 a la tabla
+(Id_anotacion, rel_gen, tipo_anot, descrip_anot)
+VALUES(36871, "PGM1", "Functional", "Catalyzes the reversible isomerization of alpha-D-glucose 1-phosphate to alpha-D-glucose 6-phosphate");
+
+INSERT INTO estudio -- añado información relativa a un estudio sobre PGM1 a la tabla
+(ref_articulo, titulo, fecha_publicacion)
+VALUES("Medr/019", "Clinical and molecular diagnosis of non-phosphomannomutase 2 N-linked congenital disorders of glycosylation in Spain", "2019-04-03");
+
+INSERT INTO estudio_gen -- relaciono la referencia del articulo de la tabla estudio con el gen PGM1
+(ref_articulo, nombre_gen)
+VALUES("Medr/019", "PGM1");
+
+INSERT INTO secuencia -- añado información relativa a la secuencia del gen PGM1 a la tabla
+(Id_secuencia, nombre_gen, repr_cad_ADN, tipo_sec, pos_rel_gen_sec)
+VALUES(5236, "PGM1", "AGAGCAGCTGCAGCCTCAGCCGGCCGCCCCTCCGCCAGCCAAGTCCGCCGCTCTGACCCCCGGCAGCAAGTCGCCACCATGGTGAAGATCGTGACAGTTAAGACCCAGGCGTACCAGGACCAGAAGCCGGGCACGAGCGG", "DNA", "81");
+
+INSERT INTO variante -- añado información relativa a una variante del gen PGM1 a la tabla
+(Id_var, Id_secuencia, alelo_ref, alelo_mut, tipo_var, pos_rel_gen_var)
+VALUES(768778, 5236, "G", "A", "Patogénica", 871);
+
+INSERT INTO estudio -- añado información relativa a un estudio sobre la variante del gen PGM1 descrita en la tabla anterior
+(ref_articulo, titulo, fecha_publicacion)
+VALUES("Pere/013", "PGM1 deficiency causes a non-neurological disorder of glycosylation", "2012-09-14");
+
+INSERT INTO estudio_variante -- relaciono la referencia del articulo sobre la variante del gen PGM1 con dicha variante
+(ref_articulo, Id_var)
+VALUES("Pere/013", 768778);
+
+INSERT INTO gen_anotacion -- relaciono el nombre del gen con su referencia de anotación
+(nombre_gen, Id_anotacion)
+VALUES("PGM1", 36871);
+
+INSERT INTO gen -- añado información relativa al gen VMA22 a la tabla
+(nombre_gen, localizacion_gen, descripcion_gen)
+VALUES("VMA22", "2q21.1", "vacuolar ATPase assembly factor VMA22");
+
+INSERT INTO anotacion -- añado información relativa a la anotación del gen VMA22 a la tabla
+(Id_anotacion, rel_gen, tipo_anot, descrip_anot)
+VALUES(960, "VMA22", "Clinical", "Congenital disorder of glycosylation, type IIo");
+
+INSERT INTO estudio -- añado información relativa a un estudio sobre VMA22 a la tabla
+(ref_articulo, titulo, fecha_publicacion)
+VALUES("Pere/017", "A Population-Based Study on Congenital Disorders of Protein N- and Combined with O-Glycosylation Experience in Clinical and Genetic Diagnosis", "2017-01-27");
+
+INSERT INTO estudio_gen -- relaciono la referencia del articulo de la tabla estudio con el gen VMA22
+(ref_articulo, nombre_gen)
+VALUES("Pere/017", "VMA22");
+
+INSERT INTO secuencia -- añado información relativa a la secuencia del gen VMA22 a la tabla
+(Id_secuencia, nombre_gen, repr_cad_ADN, tipo_sec, pos_rel_gen_sec)
+VALUES(84317, "VMA22", "MGTPLDGGSRVPIGCPAKLRRVTRKKVAPDLEGWLSLAKARYAMGAKSVGPLQYASHMEPQVCLHASEAQEGLQKFKVVRAGVHAPEEVGPREAGLRRRKGPTKTPEPESSEAPQDPLNWFGILVPHSLRQAQASFRDGLQLAADIASLQNRIDWGRSQLRGLQEKLKQLEPGAA", "Protein", "31");
+
+INSERT INTO variante -- añado información relativa a una variante del gen VMA22 a la tabla
+(Id_var, Id_secuencia, alelo_ref, alelo_mut, tipo_var, pos_rel_gen_var)
+VALUES(325113, 84317, "T", "C", "Patogénica", 92);
+
+INSERT INTO estudio -- añado información relativa a un estudio sobre la variante del gen VMA22 descrita en la tabla anterior
+(ref_articulo, titulo, fecha_publicacion)
+VALUES("Jans/016", "CCDC115 Deficiency Causes a Disorder of Golgi Homeostasis with Abnormal Protein Glycosylation", "2016-01-28");
+
+INSERT INTO estudio_variante -- relaciono la referencia del articulo sobre la variante del gen VMA22 con dicha variante
+(ref_articulo, Id_var)
+VALUES("Jans/016", 325113);
+
+INSERT INTO gen_anotacion -- relaciono el nombre del gen con su referencia de anotación
+(nombre_gen, Id_anotacion)
+VALUES("VMA22", 960);
 
 -- Muestro los valores añadidos a todas las tablas de la base de datos
 
